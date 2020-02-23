@@ -1,0 +1,28 @@
+.place-item {
+  border: 2px #000 solid;
+  border-radius: 15px;
+  background-color: #182c75;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  width: calc(45% - 2rem);
+}
+
+.place-item span {
+  display: block;
+  text-align: justify;
+  font-size: 1.1rem;
+  margin: 2px auto;
+}
+
+.place-item span:first-of-type {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.place-item span:last-of-type {
+  margin-bottom: 1rem;
+}

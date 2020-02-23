@@ -1,0 +1,15 @@
+.places-main {
+  margin: 0 2rem;
+}
+
+.places-control-panel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.places-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}

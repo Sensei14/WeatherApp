@@ -1,0 +1,11 @@
+.places-list {
+  text-align: center;
+  margin: 1rem auto;
+  width: calc(60% - 1rem);
+}
+
+.places-list__your-places {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
