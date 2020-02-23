@@ -16,3 +16,9 @@
   color: #f11;
   font-weight: 550;
 }
+
+@media only screen and (max-width: 768px) {
+  .auth {
+    max-width: 90%;
+  }
+}

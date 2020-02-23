@@ -81,14 +81,11 @@ const Places = () => {
           <div className="form-group ">
             <input
               type="text"
-              className="form-control"
+              className="form-control asd"
               placeholder="Search over places..."
               value={placeQuery}
               onChange={handleChange}
             />
-            <button className="btn btn-primary ml-1" type="submit">
-              Search
-            </button>
           </div>
         </form>
         <UnitControls />

@@ -6,7 +6,6 @@
   margin-top: 2rem;
   padding: 1rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  /* width: calc(40% - 1rem); */
 }
 
 .place-details p {
@@ -28,4 +27,10 @@
 .place-details--error {
   padding: 2rem;
   font-size: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .place-details {
+    margin: 2rem auto;
+  }
 }

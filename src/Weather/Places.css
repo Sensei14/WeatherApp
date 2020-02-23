@@ -13,3 +13,29 @@
   align-items: flex-start;
   position: relative;
 }
+
+@media only screen and (max-width: 600px) {
+  .places-main {
+    margin: 0;
+  }
+
+  .places-control-panel {
+    flex-direction: column-reverse;
+  }
+
+  .places-control-panel * {
+    margin: 5px auto;
+  }
+
+  .places-data {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .places-data {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
