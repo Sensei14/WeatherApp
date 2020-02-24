@@ -19,6 +19,10 @@
     margin: 0;
   }
 
+  .places-main form > div {
+    margin: auto;
+  }
+
   .places-control-panel {
     flex-direction: column-reverse;
   }

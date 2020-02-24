@@ -87,17 +87,22 @@ const Places = () => {
               onChange={handleChange}
             />
           </div>
+          <button className="btn btn-primary" type="submit">
+            Search
+          </button>
         </form>
         <UnitControls />
         <UserPanel />
       </div>
       <div className="places-data">
         <PlacesList places={places} showDetailsOfPlace={changeSelectedPlace} />
-        <PlaceDetails
-          isYourPlace={isYourPlace}
-          placeId={selectedPlace}
-          addToYourPlacesHandler={addToYourPlacesHandler}
-        />
+        {selectedPlace !== undefined && (
+          <PlaceDetails
+            isYourPlace={isYourPlace}
+            placeId={selectedPlace}
+            addToYourPlacesHandler={addToYourPlacesHandler}
+          />
+        )}
       </div>
     </div>
   );

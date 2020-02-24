@@ -8,14 +8,12 @@ const PlaceItem = props => {
     <div className="place-item">
       <h3>
         {weatherData.name}, {weatherData.sys.country}
-      </h3>
-      <p>
-        {weatherData.weather[0].description}
-        <img
-          src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
-          alt="weather icon"
-        />
-      </p>
+      </h3>{" "}
+      <img
+        src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
+        alt="weather icon"
+      />
+      <p>{weatherData.weather[0].description}</p>
       <span>
         {weatherData.main.temp} &deg;
         {props.units === "metric" ? "C" : "F"}

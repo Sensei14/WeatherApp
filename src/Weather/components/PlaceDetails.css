@@ -8,8 +8,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.place-details img {
+  display: block;
+  margin: auto;
+}
+
 .place-details p {
   margin-bottom: 0;
+}
+
+.place-details button {
+  display: block;
+  margin: auto;
 }
 
 .place-details span {

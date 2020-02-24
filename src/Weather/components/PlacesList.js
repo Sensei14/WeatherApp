@@ -22,7 +22,11 @@ const PlacesList = props => {
     )
       .then(res => res.json())
       .then(res => {
-        if (res.list) setPlacesData(res.list);
+        if (res.list) {
+          setPlacesData(res.list);
+        } else {
+          setPlacesData([]);
+        }
 
         setIsLoading(false);
       });
@@ -38,7 +42,11 @@ const PlacesList = props => {
   }, [fetchWeatherData]);
 
   if (placesData.length === 0) {
-    return <div>Nie masz obserwowanych miejsc</div>;
+    return (
+      <div className="places-list">
+        <h4>You don't have any place on your list. Search and add some</h4>
+      </div>
+    );
   } else {
     const placesList = placesData.map(place => (
       <PlaceItem

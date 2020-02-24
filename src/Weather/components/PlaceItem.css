@@ -10,6 +10,11 @@
   width: calc(45% - 2rem);
 }
 
+.place-item img {
+  display: block;
+  margin: auto;
+}
+
 .place-item span {
   display: block;
   text-align: justify;

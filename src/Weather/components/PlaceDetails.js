@@ -1,6 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import "./PlaceDetails.css";
-import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel } from "victory";
+import {
+  VictoryChart,
+  VictoryTheme,
+  VictoryBar,
+  VictoryLabel,
+  VictoryLine
+} from "victory";
 import { AuthContext } from "../../shared/context/AuthContext";
 import LoadingSpinner from "../../shared/UI/LoadingSpinner";
 
@@ -10,6 +16,7 @@ const PlaceDetails = props => {
   const units = auth.units;
   const [place, setPlace] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [showHumidityChart, setShowHumidityChart] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,17 +32,29 @@ const PlaceDetails = props => {
       });
   }, [placeId, units, auth.userId]);
 
+  const showHumiChart = () => {
+    setShowHumidityChart(!showHumidityChart);
+  };
+
+  if (isLoading && !place) {
+    return (
+      <div className="place-details ">
+        <LoadingSpinner />
+        <p>Searching...</p>
+      </div>
+    );
+  }
+
   if (!placeId || !place) {
     return (
       <div className="place-details place-details--error">
-        {isLoading && <LoadingSpinner />}
         <p>Could not find this place.</p>
         <p>Please try some other places.</p>
       </div>
     );
   }
 
-  const chartData = [];
+  const chartTempData = [];
 
   for (let i = 0; i < 7; i++) {
     let x = new Date(place.list[i].dt_txt);
@@ -45,9 +64,25 @@ const PlaceDetails = props => {
     } else {
       x = x + ":00";
     }
-    chartData.push({
+    chartTempData.push({
       x: x,
       y: Math.floor(place.list[i].main.temp)
+    });
+  }
+
+  const chartHumiData = [];
+
+  for (let i = 0; i < 7; i++) {
+    let x = new Date(place.list[i].dt_txt);
+    x = x.getHours();
+    if (x === 0) {
+      x = "0" + x + ":00";
+    } else {
+      x = x + ":00";
+    }
+    chartHumiData.push({
+      x: x,
+      y: place.list[i].main.humidity
     });
   }
 
@@ -56,13 +91,11 @@ const PlaceDetails = props => {
       {isLoading && <LoadingSpinner />}
       <div className="place-detals__place-data">
         <h3> {place.city.name}</h3>
-        <p>
-          {place.list[0].weather[0].description}
-          <img
-            src={`http://openweathermap.org/img/wn/${place.list[0].weather[0].icon}.png`}
-            alt="weather icon"
-          />
-        </p>
+        <img
+          src={`http://openweathermap.org/img/wn/${place.list[0].weather[0].icon}@2x.png`}
+          alt="weather icon"
+        />
+        <p>{place.list[0].weather[0].description}</p>
         <span>
           {place.list[0].main.temp} &deg;
           {auth.units === "metric" ? "C" : "F"}
@@ -80,15 +113,35 @@ const PlaceDetails = props => {
         animate={{ duration: 1000 }}
       >
         <VictoryLabel text={"Temperature"} textAnchor="middle" x={220} y={10} />
-        <VictoryBar
-          alignment="start"
-          barWidth={10}
+        <VictoryLine
           style={{
-            data: { fill: "#182c75" }
+            data: { stroke: "#182c75" }
           }}
-          data={chartData}
+          data={chartTempData}
         />
       </VictoryChart>
+
+      {showHumidityChart && (
+        <VictoryChart
+          theme={VictoryTheme.grayscale}
+          domainPadding={10}
+          animate={{ duration: 1000 }}
+        >
+          <VictoryLabel text={"Humidity"} textAnchor="middle" x={220} y={10} />
+          <VictoryBar
+            alignment="start"
+            barWidth={10}
+            style={{
+              data: { fill: "#182c75" }
+            }}
+            data={chartHumiData}
+          />
+        </VictoryChart>
+      )}
+
+      <button className="btn btn-dark  mb-2" onClick={showHumiChart}>
+        {showHumidityChart ? "Hide humidity chart" : "Show humidity chart"}
+      </button>
       <button
         className="btn btn-outline-primary btn-lg"
         onClick={props.addToYourPlacesHandler}
